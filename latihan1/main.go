@@ -1,6 +1,7 @@
 package main
 
 import (
+	"latihan1/handler"
 	"log"
 	"net/http"
 )
@@ -9,29 +10,24 @@ func main() {
 	// instansiasi object route
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/", indexHandler) // routing root
-	mux.HandleFunc("/hello", helloHandler)
-	mux.HandleFunc("/profile", profileHandler)
-
-	log.Println("Starting web on port 8080")
-
-	err := http.ListenAndServe(":8080", mux)
-	log.Fatal(err)
-}
-
-func indexHandler(w http.ResponseWriter, r *http.Request) {
-	log.Printf(r.URL.Path)
-	// jika halaman url tidak ada maka tampilkan 404
-	if r.URL.Path != "/" {
-		http.NotFound(w, r)
-		return
+	// cara lain membuat Handler Function
+	aboutHandler := func (w http.ResponseWriter, r *http.Request)  {
+		w.Write([]byte("About Page"))
 	}
-	w.Write([]byte("Welcome to my website"))
-}
-func helloHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Hello World, Saya sedang belajar web golang"))
-}
 
-func profileHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Hai, nama saya Danil, saya sedang belajar Golang"))
+	mux.HandleFunc("/", handler.HomeHandler) // routing root
+	mux.HandleFunc("/hello", handler.HelloHandler)
+	mux.HandleFunc("/profile", handler.ProfileHandler)
+	mux.HandleFunc("/product", handler.ProductHandler)
+	mux.HandleFunc("/about",aboutHandler)
+	// anonymous function
+	mux.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request){
+		w.Write([]byte("halaman test"))
+	})
+
+
+	log.Println("Starting web on port 8081")
+
+	err := http.ListenAndServe(":8081", mux)
+	log.Fatal(err)
 }

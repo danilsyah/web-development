@@ -1,0 +1,29 @@
+{{define "layout"}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Product</title>
+	<style>
+		h1 {
+			color: brown;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header">
+		Header ada di sini
+	</div>
+
+	{{ template "main" .}}
+
+	<div class="footer">
+		footer ada di sini
+	</div>
+</body>
+
+</html>
+{{end}}
