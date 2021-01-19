@@ -1,0 +1,17 @@
+.header {
+  margin-bottom: 30px;
+}
+
+.content {
+  margin-bottom: 40px;
+}
+.box-with-shadow {
+  border: 1px solid;
+  padding: 10px;
+  box-shadow: 5px 10px #888888;
+  margin-top: 30px;
+}
+
+.text {
+  color: deepskyblue;
+}
